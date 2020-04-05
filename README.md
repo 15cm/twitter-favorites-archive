@@ -59,4 +59,4 @@ To run all the steps together with data dumped to `output/`, run `./scripts/arch
 ### PhotoPrism
 I import the media files gathered by this project into [PhotoPrism](https://github.com/photoprism/photoprism) so that I can browse images of my Twitter Favorites in a more flexible way.
 
-![PhotoPrism Use Case Screenshot](./assets/images/2020-04-04_20-29.png)
+![PhotoPrism Use Case Screenshot](./assets/images/use-case-photoprism-0.png)
