@@ -20,6 +20,7 @@ access credentials in the "Keys and Tokens" tab of your App's page.
 Rename `docker/config-example.env` to `docker/config.env` and customize it with:
 - Twitter API credentials
 - Your username
+- [optional] Cron job schedule(for "Cron job" section)
 - Other docker ENV variables.
 
 #### Oneshot
@@ -27,6 +28,13 @@ Rename `docker/config-example.env` to `docker/config.env` and customize it with:
 docker run --rm --name=tfa --env-file=./docker/config.env -v ${PWD}/output:/app/output 15cm/twitter-favorites-archive /app/scripts/archive.sh /app/output
 ```
 
+#### Cron job
+Rename `docker/docker-compose-example.yaml` to `docker/docker-compose.yaml` and
+customize it with the mount point of `app-output` volume.
+
+`cd` into `docker` folder and run:
+```
+docker-compose up -d
 ### Run in local environment
 #### Setup
 Rename `config-example.yaml` to `config.yaml` and customize it with:
@@ -43,15 +51,6 @@ your favorite tweets under `output/year/month/tweet_id/tweet.json`.
 3. [Optional] Run `./scripts/01-update-all-medias-meta.sh output`. It will fetch meta data from `tweet.json` and populate Exif data of the downloaded media files.
 
 To run all the steps together with data dumped to `output/`, run `./scripts/archive.sh output`
-
-#### Cron job
-Rename `docker/docker-compose-example.yaml` to `docker/docker-compose.yaml` and
-customize it with the mount point of `app-output` volume.
-
-`cd` into `docker` folder and run:
-```
-docker-compose up -d
-```
 
 ## Use cases
 ### PhotoPrism
