@@ -121,7 +121,11 @@ class Cli < Thor
     output_dir = options[:output_dir]
     should_organize_output = options[:organize_output]
 
-    progressbar = ProgressBar.create(title: 'Favorites', total: count)
+    progressbar = ProgressBar.create(
+      title: 'Favorites',
+      total: count,
+      format: '%a <%B> %p%% %t'
+    )
     @client.fav_tweets(count).each do |tweet|
       progressbar.increment
       dir_for_months = if should_organize_output
@@ -136,6 +140,7 @@ class Cli < Thor
         f.puts JSON.pretty_generate(dump_tweet(tweet))
       end
     end
+    puts ''
   end
 end
 

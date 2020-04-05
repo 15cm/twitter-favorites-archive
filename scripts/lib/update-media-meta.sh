@@ -21,4 +21,4 @@ full_text=$(jq -r '.full_text' $meta_file | perl -pe 'use utf8; s/(\shttps:\/\/t
 url=$(jq -r '.full_text' $meta_file | perl -ne '/(https:\/\/t.co\/[a-zA-Z0-9]+)(?!.*https:\/\/t.co\/[a-zA-Z0-9]+)/ && print "$1\n";')
 
 exiftool -q -overwrite_original -DateTimeOriginal="${created_at}" -ImageDescription="${url}" -UserComment="${full_text}" $file
-echo "Updated meta data for ${file}."
+echo "Updated meta data of ${file}."
