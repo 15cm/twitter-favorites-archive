@@ -62,6 +62,7 @@ module CliHelper
         #{conf_path} not found!
         Please run`#{File.basename(__FILE__)} init` to create the config file first.
       EOF
+      exit(1)
     end
   end
 end
