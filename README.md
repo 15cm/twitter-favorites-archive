@@ -6,7 +6,7 @@ A series of scripts to archive your metadata and medias of Twitter Favorites.
 Register an App on [Twitter Developer](https://developer.twitter.com/apps) and get
 access credentials in the "Keys and Tokens" tab of your App's page.
 
-### Dependencies
+### Dependencies(for running locally)
 - ruby 2.6
 - [jq](https://github.com/stedolan/jq)
 - wget
@@ -35,8 +35,11 @@ customize it with the mount point of `app-output` volume.
 `cd` into `docker` folder and run:
 ```
 docker-compose up -d
+```
 ### Run in local environment
 #### Setup
+Run `gem install bundler && bundle install` to install Ruby dependencies.
+
 Rename `config-example.yaml` to `config.yaml` and customize it with:
 - Twitter API credentials
 - Your username
