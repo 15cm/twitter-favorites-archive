@@ -1,5 +1,5 @@
-# Twitter Favorites Archive
-A series of scripts to archive your metadata and medias of Twitter Favorites.
+# Twitter Favorites(Likes) Archive
+A series of scripts to archive your metadata and medias of Twitter Favorites(Likes).
 
 ## Prerequisites
 ### Twitter API
