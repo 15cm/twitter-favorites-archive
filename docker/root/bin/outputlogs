@@ -1,0 +1,29 @@
+#!/bin/bash
+
+trap 'kill $(jobs -p) 2> /dev/null' EXIT
+
+tail_arguments="-F -n 0"
+stderr=0
+
+for argument in "${@}"
+do
+    case "${argument}" in
+    -o)
+        stderr=0
+        ;;
+    -e)
+        stderr=1
+        ;;
+    *)
+        touch "${argument}"
+        if [ "${stderr}" -eq 0 ]
+        then
+            tail ${tail_arguments} "${argument}" &
+        else
+            tail ${tail_arguments} "${argument}" 1>&2 &
+        fi
+        ;;
+    esac
+done
+
+wait
