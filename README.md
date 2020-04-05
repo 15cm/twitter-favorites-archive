@@ -1,5 +1,5 @@
 # Twitter Favorites(Likes) Archive
-A series of scripts to archive your metadata and medias of Twitter Favorites(Likes).
+A series of scripts to archive metadata and medias of your Twitter Favorites(Likes).
 
 ## Prerequisites
 ### Twitter API
@@ -36,6 +36,7 @@ customize it with the mount point of `app-output` volume.
 ```
 docker-compose up -d
 ```
+
 ### Run in local environment
 #### Setup
 Run `gem install bundler && bundle install` to install Ruby dependencies.
