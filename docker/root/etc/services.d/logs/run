@@ -1,0 +1,5 @@
+#!/bin/bash
+
+IFS=$'\n' read -d '' -r -a stdout_logs < stdout
+IFS=$'\n' read -d '' -r -a stderr_logs < stderr
+exec outputlogs -o "${stdout_logs[@]}" -e "${stderr_logs[@]}"

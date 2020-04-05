@@ -1,0 +1,22 @@
+version: '3.6'
+
+services:
+  app:
+    image: 15cm/twitter-favorites-archive
+    logging:
+      options:
+        max-size: "200k"
+        max-file: "10"
+    restart: always
+    env_file: ./config.env
+    volumes:
+      - type: volume
+        source: app-output
+        target: /app/output
+
+volumes:
+  app-output:
+    driver_opts:
+      type: none
+      o: bind
+      device: <path_to_output_dir>
