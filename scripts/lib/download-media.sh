@@ -21,5 +21,5 @@ for ((i=0; i<${#urls[@]}; i++)); do
       url_no_params="${url%\?*}"
       f=${dir}/${id}-${i}."${url_no_params##*.}"
   fi
-  wget -c -O $f $url
+  wget -c --tries=3 --waitretry=10 -O $f $url
 done
