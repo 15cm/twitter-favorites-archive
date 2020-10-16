@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 deps=(
   fd
@@ -21,4 +20,4 @@ for dep in $deps; do
   fi
 done
 
-fd --no-ignore 'tweet\.json' "$1" | parallel --halt-on-error 1 "${dir}/lib/download-media.sh {}"
+fd --no-ignore 'tweet\.json' "$1" | parallel "${dir}/lib/download-media.sh {}"
