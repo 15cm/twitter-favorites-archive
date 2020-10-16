@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 deps=(
   fd
@@ -20,4 +19,4 @@ for dep in $deps; do
   fi
 done
 
-fd --no-ignore '\.(png|jpg)$' "$1" | parallel --halt-on-error 1 "${dir}/lib/update-media-meta.sh {}"
+fd --no-ignore '\.(png|jpg)$' "$1" | parallel "${dir}/lib/update-media-meta.sh {}"

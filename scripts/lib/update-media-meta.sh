@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 for dep in $deps; do
   if ! which $dep > /dev/null 2>&1; then

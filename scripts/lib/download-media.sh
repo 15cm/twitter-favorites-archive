@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # Download media and fill its Exif meta data.
 
