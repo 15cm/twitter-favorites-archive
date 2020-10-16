@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 dir=$(dirname $0)
 root_dir=$(dirname ${dir})
