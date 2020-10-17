@@ -25,7 +25,7 @@ Rename `docker/config-example.env` to `docker/config.env` and customize it with:
 
 #### Oneshot
 ```sh
-docker run --rm --name=tfa --env-file=./docker/config.env -v ${PWD}/output:/app/output 15cm/twitter-favorites-archive /app/scripts/archive.sh /app/output
+docker run --rm --name=tfa --env-file=./docker/config.env -v ${PWD}/output:/app/output 15cm/twitter-favorites-archive /app/scripts/main.sh -tdmu -o /app/output -c /app/output/cache.txt
 ```
 
 #### Cron job
