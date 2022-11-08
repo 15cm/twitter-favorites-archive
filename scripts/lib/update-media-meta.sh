@@ -35,7 +35,7 @@ hashtags=$(jq -r '.entities.hashtags[].text' "$meta_file")
 
 if [ -z "$cache_file" ] || ! $(grep -Fqs "$file" "$cache_file"); then
 
-  exiftool -q -overwrite_original -iptc:all -codedcharacterset=utf8 -charset iptc=UTF8 -DateTimeOriginal="${created_at}" -Subject="Twitter Favorites Archive Project" -artist="${user_name}" -ImageDescription="${full_text}" -comment="${url}" -keywords="${hashtags}" "$file"
+  exiftool -q -overwrite_original -codedcharacterset=utf8 -charset iptc=UTF8 -DateTimeOriginal="${created_at}" -Subject="Twitter Favorites Archive Project" -artist="${user_name}" -ImageDescription="${full_text}" -comment="${url}" -keywords="${hashtags}" "$file"
 
   if [ $? -eq 0 ]; then
     echo "Updated meta data of $file."
