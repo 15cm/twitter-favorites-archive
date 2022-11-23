@@ -24,31 +24,39 @@ fi
 
 file=$(realpath "$file")
 dir=$(dirname "$file")
-
 id=$(jq '.id' "$file")
+
+media_num=0
+download_media() {
+  for url in "$@"; do
+    if grep -q 'name=large' <<<"${url}"; then
+      f="${dir}/${id}-${media_num}.jpg"
+    elif grep -q '.mp4' <<<"${url}"; then
+      url_no_params="${url%\?*}"
+      f="${dir}/${id}-${media_num}.${url_no_params##*.}"
+      # Make sure the video and photo have the same name. Useful in PhotoPrism(grouped into stacks)
+      ((media_num--))
+    else
+      url_no_params="${url%\?*}"
+      f="${dir}/${id}-${media_num}.${url_no_params##*.}"
+    fi
+    if ! [ -f "$f" ]; then
+      curl -fL $url -o "$f"
+    else
+      echo "$f" already exists. Skipped.
+    fi
+    ((media_num++))
+  done
+}
+
+# media type. see also: https://www.rubydoc.info/gems/twitter/Twitter/Media, https://docs.tweepy.org/en/stable/v2_models.html#tweepy.Media
+mapfile -t photo_urls < <(jq -r '.extended_entities.media // [] | map(if .type == "photo" then "\(.media_url_https)?format=jpg&name=large" else empty end) | .[]' "$file")
 # 1. download video with highest bitrate
 # 2. video does not support some metadata fields, so download image too
 # 3. order: video_url + video_image_url
-urls=($(jq -r '.extended_entities.media // [] | map(if .type == "photo" then "\(.media_url_https)?format=jpg&name=large" elif .type == "video" then (.video_info.variants | max_by(.bitrate) | .url) + "\n" + "\(.media_url_https)?format=jpg&name=large" else .media_url_https end) | .[]' "$file"))
+mapfile -t video_urls < <(jq -r '.extended_entities.media // [] | map(if .type == "video" then (.video_info.variants | max_by(.bitrate) | .url) + "\n" + "\(.media_url_https)?format=jpg&name=large" else empty end) | .[]' "$file")
+mapfile -t gif_urls < <(jq -r '.extended_entities.media // [] | map(if .type == "animated_gif" then (.video_info.variants | max_by(.bitrate) | .url) + "\n" + "\(.media_url_https)?format=jpg&name=large" else empty end) | .[]' "$file")
 
-j=0
-for ((i=0; i<${#urls[@]}; i++)); do
-  url=${urls[$i]}
-  if grep -q 'name=large' <<< "${url}"; then
-    f="${dir}/${id}-${j}.jpg"
-  elif grep -q '.mp4' <<< "${url}"; then
-      url_no_params="${url%\?*}"
-      f="${dir}/${id}-${j}.${url_no_params##*.}"
-      # Make sure the video and photo have the same name. Useful in PhotoPrism(grouped into stacks) 
-      ((j--))
-  else
-      url_no_params="${url%\?*}"
-      f="${dir}/${id}-${j}.${url_no_params##*.}"
-  fi
-  if ! [ -f "$f" ]; then
-    curl -fL $url -o "$f"
-  else
-    echo "$f" already exists. Skipped.
-  fi
-  ((j++))
-done
+download_media "${photo_urls[@]}"
+download_media "${video_urls[@]}"
+download_media "${gif_urls[@]}"
