@@ -4,9 +4,6 @@ FROM ruby:3.1.0-alpine
 LABEL maintainer="https://github.com/renatolond/mastodon-twitter-poster" \
       description="Crossposter to post statuses between Mastodon and Twitter"
 
-ARG UID=991
-ARG GID=991
-
 ENV PATH=/crossposter/bin:$PATH \
     RAILS_SERVE_STATIC_FILES=true \
     RAILS_ENV=production \
