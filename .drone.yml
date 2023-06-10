@@ -5,7 +5,7 @@ name: docker-build
 
 steps:
   - name: docker
-    image: plugins/kaniko:1.6.10-kaniko1.8.1
+    image: plugins/kaniko:1.7.5-kaniko1.9.1
     settings:
       repo: 15cm/twitter-favorites-archive
       auto_tag: true

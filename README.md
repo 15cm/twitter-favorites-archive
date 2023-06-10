@@ -7,7 +7,7 @@ Register an App on [Twitter Developer](https://developer.twitter.com/apps) and g
 access credentials in the "Keys and Tokens" tab of your App's page.
 
 ### Dependencies(for running locally)
-- ruby 2.6
+- ruby 2.7
 - [jq](https://github.com/stedolan/jq)
 - wget
 - GNU parallel
