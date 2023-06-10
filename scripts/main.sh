@@ -17,7 +17,7 @@ done
 dir=$(dirname "$0")
 root_dir=$(dirname "${dir}")
 
-while getopts 'o:c:utdm' option; do
+while getopts 'o:c:n:utdm' option; do
   case "$option" in
     o)
       output_dir="$OPTARG"
@@ -31,6 +31,9 @@ while getopts 'o:c:utdm' option; do
     t)
       twitter_favorites_fetching=y
       ;;
+    n)
+      twitter_favorites_fetching_number="$OPTARG"
+      ;;
     d)
       download=y
       ;;
@@ -38,7 +41,7 @@ while getopts 'o:c:utdm' option; do
       metadata_update=y
       ;;
     *)
-      echo "Usage : $(basename $0) <-o output_dir> [-c cache_file_for_metadata_update] [-u(update cache)] [-t(twitter favorites fetching)][-d(download)] [-m(metadata update)]"
+      echo "Usage : $(basename $0) <-o output_dir> [-c cache_file_for_metadata_update] [-u(update cache)] [-t(twitter favorites fetching)] [-n(twitter favorites fetching number)] [-d(download)] [-m(metadata update)]"
       echo "One of -t/-d/-m must be specified."
       exit 1
       ;;
@@ -46,13 +49,13 @@ while getopts 'o:c:utdm' option; do
 done
 
 if [ -z "$output_dir" ] || { [ -z "$twitter_favorites_fetching" ] && [ -z "$download" ] && [ -z "$metadata_update" ]; }; then
-  echo "Usage : $(basename $0) <-o output_dir> [-c cache_file_for_metadata_update] [-u(update cache)] [-t(twitter favorites fetching)][-d(download)] [-m(metadata update)]"
+  echo "Usage : $(basename $0) <-o output_dir> [-c cache_file_for_metadata_update] [-u(update cache)] [-t(twitter favorites fetching)] [-n(twitter favorites fetching number)] [-d(download)] [-m(metadata update)]"
   echo "One of -t/-d/-m must be specified."
   exit 1
 fi
 
 if [ -n "$twitter_favorites_fetching" ]; then
-  bundle exec "${root_dir}/twitter-favorites-archive.rb" meta -o="${output_dir}"
+  bundle exec "${root_dir}/twitter-favorites-archive.rb" meta -o="${output_dir}" -n=${twitter_favorites_fetching_number:0}
 fi
 
 if [ -n "$download" ]; then

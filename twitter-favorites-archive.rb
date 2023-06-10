@@ -95,10 +95,10 @@ class Cli < Thor
   end
 
   desc 'meta', 'Archives meta data of favorite tweets for the user sepcified in config.yaml'
-  method_option :count,
+  method_option :number,
                 type: :numeric,
                 default: 0,
-                aliases: '-c',
+                aliases: '-n',
                 desc: 'Number of favorite tweets to archive. 0 means the total of user\'s favorites available by Twitter API'
   method_option :output_dir,
                 type: :string,
@@ -114,8 +114,8 @@ class Cli < Thor
     @client = parseConfig(@conf_path)
     return if @client.nil?
 
-    count = if options[:count].positive?
-              options[:count]
+    count = if options[:number].positive?
+              options[:number]
             else
               @client.user_fav_count
             end

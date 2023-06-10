@@ -1,4 +1,4 @@
-FROM ruby:2.6.6-buster
+FROM ruby:2.7-buster
 
 RUN apt-get update \
     && apt-get install -y cron jq fd-find parallel exiftool locales locales-all \
@@ -21,6 +21,8 @@ COPY scripts ./scripts
 
 # s6 setup
 COPY docker/root /
+
+ENV FAVORITES_NUMBER_TO_FETCH=0
 
 VOLUME ["/app/output"]
 ENTRYPOINT ["/init"]
