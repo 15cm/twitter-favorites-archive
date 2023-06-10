@@ -1,4 +1,4 @@
-FROM ruby:2.7-buster
+FROM ruby:3.2-buster
 
 RUN apt-get update \
     && apt-get install -y cron jq fd-find parallel exiftool locales locales-all \
@@ -15,8 +15,9 @@ RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
 
 # Project setup
 WORKDIR /app
-COPY *.rb Gemfile* ./
+COPY Gemfile* ./
 RUN gem install bundler && bundle install
+COPY src ./src
 COPY scripts ./scripts
 
 # s6 setup

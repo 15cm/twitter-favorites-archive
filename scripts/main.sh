@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 deps=(
   fd
@@ -55,7 +55,7 @@ if [ -z "$output_dir" ] || { [ -z "$twitter_favorites_fetching" ] && [ -z "$down
 fi
 
 if [ -n "$twitter_favorites_fetching" ]; then
-  bundle exec "${root_dir}/twitter-favorites-archive.rb" meta -o="${output_dir}" -n=${twitter_favorites_fetching_number:0}
+  bundle exec "${root_dir}/src/twitter-favorites-archive.rb" meta -o="${output_dir}" -n=${twitter_favorites_fetching_number:0}
 fi
 
 if [ -n "$download" ]; then

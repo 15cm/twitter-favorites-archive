@@ -41,20 +41,20 @@ docker-compose up -d
 #### Setup
 Run `gem install bundler && bundle install` to install Ruby dependencies.
 
-Rename `config-example.yaml` to `config.yaml` and customize it with:
+Rename `src/config-example.yaml` to `src/config.yaml` and fill it with your:
 - Twitter API credentials
-- Your username
+- Username
 
-You can also run `./twitter-favorites-archive.rb init [args...]` to generate
-`config.yaml`.
+You can also run `ruby src/twitter-favorites-archive.rb init [args...]` to generate
+`src/config.yaml`.
 
 #### Execute
-1. Run `./twitter-favorites-archive.rb meta`. It will dumps meta data of
+1. Run `ruby src/twitter-favorites-archive.rb meta`. It will dumps meta data of
 your favorite tweets under `output/year/month/tweet_id/tweet.json`.
-2. [Optional] Run `./scripts/00-download-all-medias.sh output`. It will download all media(jpeg of photos and video thumbnail) files of `tweet.json` to the same folder.
-3. [Optional] Run `./scripts/01-update-all-medias-meta.sh output`. It will fetch meta data from `tweet.json` and populate Exif data of the downloaded media files.
+2. [Optional] Run `scripts/00-download-all-medias.sh output`. It will download all media(jpeg of photos and video thumbnail) files of `tweet.json` to the same folder.
+3. [Optional] Run `scripts/01-update-all-medias-meta.sh output`. It will fetch meta data from `tweet.json` and populate Exif data of the downloaded media files.
 
-To run all the steps together with data dumped to `output/`, run `./scripts/archive.sh output`
+To run all the steps together with data dumped to `output/`, run `scripts/archive.sh output`
 
 ## Use cases
 ### PhotoPrism

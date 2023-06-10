@@ -3,12 +3,12 @@
 # frozen_string_literal: true
 
 require 'twitter'
-require 't'
 require 'thor'
 require 'json'
 require 'fileutils'
 require 'yaml'
 require 'ruby-progressbar'
+require_relative 'lib/t/collectable'
 
 module TweetHelper
   def dump_tweet(tweet)

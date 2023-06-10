@@ -2,7 +2,7 @@
 
 cd /app && \
   bundle exec \
-         ./twitter-favorites-archive.rb \
+         ./src/twitter-favorites-archive.rb \
          init \
          --consumer-key=${TFA_CONSUMER_KEY} \
          --consumer-secret=${TFA_CONSUMER_SECRET} \
